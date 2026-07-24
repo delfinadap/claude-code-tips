@@ -45,7 +45,7 @@ curl -sL https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG
 
 ### GitHub issues (primary - reliable and fetchable)
 
-The most dependable signal. Search recent open bug reports, sorted by reactions. This is a read-only search, so plain host `gh` is fine - no container needed:
+The most dependable signal. Search recent open bug reports, sorted by reactions:
 
 ```bash
 gh api -X GET search/issues \
