@@ -4,7 +4,7 @@ Over the past few months, I've been using GitHub as my main knowledge base, and 
 
 ## How I use it
 
-To me, it's kind of a Notion replacement. Instead of opening up a Notion document, I just create a new repo or find an existing private repo where I can put my notes. I dictate my thoughts and develop my notes there, and if I have some research to do, I let Claude Code do the research and update those repos.
+To me, it's kind of like a Notion replacement. Instead of opening up a Notion document, I just create a new repo or find an existing private repo where I can put my notes. I dictate my thoughts and develop my notes there, and if I have some research to do, I let Claude Code do the research and update those repos.
 
 I also have repos for skills. If I have to repeat the same type of work over and over again, it's nice to be able to have that in a skill format so I can reuse those workflows.
 
@@ -42,4 +42,4 @@ This downloads the chunks, joins them back into the original file, and verifies 
 
 ## Why now
 
-It didn't make sense before, because it would have been too much work to create repos, manage them, and search through them. Coding agents just make all of that so much easier. I highly recommend it.
+It didn't make sense before, because it would have been too much work to create repos, manage them, and search through them. Coding agents make all of that so much easier. I highly recommend it.

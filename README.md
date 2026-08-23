@@ -1012,6 +1012,8 @@ I also have repos for skills. If I have to repeat the same type of work over and
 
 The one missing piece is search: GitHub's own search doesn't work well for private repos. I wrote about that problem and how I solved it in [The missing private GitHub search](content/the-missing-private-github-search.md) - it's a [skill](skills/private-github-search/SKILL.md) that mirrors all your repos locally and searches them with ripgrep, so I can just ask Claude Code "which repo has X" and it finds it.
 
+See: [Why GitHub is the best knowledge base](content/why-github-is-the-best-knowledge-base.md)
+
 ---
 
 📺 **Related talk**: [Claude Code Masterclass](https://youtu.be/9UdZhTnMrTA) - lessons and project examples from 31 months of agentic coding
