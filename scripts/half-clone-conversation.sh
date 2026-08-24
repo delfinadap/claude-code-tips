@@ -76,7 +76,14 @@ generate_uuid() {
 }
 
 convert_path_to_dirname() {
-    echo "$1" | sed 's|^/||' | sed 's|/|-|g' | sed 's|^|-|'
+    local path="$1"
+    if [[ "$path" =~ ^[A-Za-z]: ]]; then
+        # Windows-style path (C:\Users\yurizen or C:/Users/yurizen) ->
+        # Claude Code convention: C--Users-yurizen (colon and separators -> "-")
+        echo "$path" | sed 's|[\\/]|-|g' | sed 's|:|-|g'
+    else
+        echo "$path" | sed 's|^/||' | sed 's|/|-|g' | sed 's|^|-|'
+    fi
 }
 
 find_conversation_file() {
@@ -108,7 +115,14 @@ get_project_from_conv_file() {
     local conv_file="$1"
     local project_dirname
     project_dirname=$(dirname "$conv_file" | xargs basename)
-    echo "$project_dirname" | sed 's|^-|/|' | sed 's|-|/|g'
+    if [[ "$project_dirname" =~ ^[A-Za-z]-- ]]; then
+        # Windows-style: C--Users-yurizen -> C:\Users\yurizen
+        local drive="${project_dirname:0:1}"
+        local rest="${project_dirname:3}"
+        echo "${drive}:\\$(echo "$rest" | sed 's|-|\\|g')"
+    else
+        echo "$project_dirname" | sed 's|^-|/|' | sed 's|-|/|g'
+    fi
 }
 
 # Filter JSONL to clean user messages only.
