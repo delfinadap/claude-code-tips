@@ -57,6 +57,7 @@ Here are my tips for getting the most out of Claude Code, including a custom sta
 - [Tip 45: Quick setup script](#tip-45-quick-setup-script)
 - [Tip 46: Switch between multiple Claude accounts](#tip-46-switch-between-multiple-claude-accounts)
 - [Tip 47: Use GitHub as your knowledge base](#tip-47-use-github-as-your-knowledge-base)
+- [Tip 48: Review a TESTING.md instead of the raw code](#tip-48-review-a-testingmd-instead-of-the-raw-code)
 
 <!-- /TOC -->
 
@@ -1013,6 +1014,14 @@ I also have repos for skills. If I have to repeat the same type of work over and
 The one missing piece is search: GitHub's own search doesn't work well for private repos. I wrote about that problem and how I solved it in [The missing private GitHub search](content/the-missing-private-github-search.md) - it's a [skill](skills/private-github-search/SKILL.md) that mirrors all your repos locally and searches them with ripgrep, so I can just ask Claude Code "which repo has X" and it finds it.
 
 See: [Why GitHub is the best knowledge base](content/why-github-is-the-best-knowledge-base.md)
+
+## Tip 48: Review a TESTING.md instead of the raw code
+
+When you need to review a large amount of code - an external PR, code Claude Code just generated, or even your own - the real challenge is building a mental model of what's going on. Reading the code is one way, and sometimes you should. But often the question is simply: how do I know this is correct?
+
+You can go one level above reading the code or the tests. Have Claude Code test everything thoroughly, then document how it tested and what it verified in a TESTING.md, and review that document instead. You can go back and forth on it until it answers your questions, the same way you'd iterate on any draft.
+
+Here's a real example: [TESTING.md](TESTING.md) from reviewing an external PR to this repo, where Claude Code reproduced the bug on a real Windows runner in GitHub Actions, verified the fix, and condensed the whole review into a few lines.
 
 ---
 
