@@ -1017,11 +1017,11 @@ See: [Why GitHub is the best knowledge base](content/why-github-is-the-best-know
 
 ## Tip 48: Review a TESTING.md instead of the raw code
 
-When you need to review a large amount of code - an external PR, code Claude Code just generated, or even your own - the real challenge is building a mental model of what's going on. Reading the code is one way, and sometimes you should. But often the question is simply: how do I know this is correct?
+When you need to review a large amount of code (Claude Code generated code, a PR from your teammate, or an external PR), the real challenge is building a mental model of what's going on. The question is, how do you know if this is correct? You can read the code. You can write tests. But there is another way that's one level above those.
 
-You can go one level above reading the code or the tests. Have Claude Code test everything thoroughly, then document how it tested and what it verified in a TESTING.md, and review that document instead. You can go back and forth on it until it answers your questions, the same way you'd iterate on any draft.
+What I recommend is to have Claude Code test everything in the given code thoroughly, let it document how it tested and verified everything in a TESTING.md document, and review that document instead. You can go back and forth on it to get a good format for you to review. If it's too long, ask it to make it shorter. If it's too short, ask for more information.
 
-Here's a real example: [TESTING.md](TESTING.md) from reviewing an external PR to this repo, where Claude Code reproduced the bug on a real Windows runner in GitHub Actions, verified the fix, and condensed the whole review into a few lines.
+Here is a real example: [TESTING.md](TESTING.md) from reviewing an external PR to this repo, where Claude Code reproduced the bug on a real Windows runner in GitHub Actions, verified the fix, and summarized everything it tested.
 
 ---
 
