@@ -57,7 +57,7 @@ Here are my tips for getting the most out of Claude Code, including a custom sta
 - [Tip 45: Quick setup script](#tip-45-quick-setup-script)
 - [Tip 46: Switch between multiple Claude accounts](#tip-46-switch-between-multiple-claude-accounts)
 - [Tip 47: Use GitHub as your knowledge base](#tip-47-use-github-as-your-knowledge-base)
-- [Tip 48: Review a TESTING.md instead of the raw code](#tip-48-review-a-testingmd-instead-of-the-raw-code)
+- [Tip 48: Learn to review code through a TESTING.md document](#tip-48-learn-to-review-code-through-a-testingmd-document)
 
 <!-- /TOC -->
 
@@ -1015,7 +1015,7 @@ The one missing piece is search: GitHub's own search doesn't work well for priva
 
 See: [Why GitHub is the best knowledge base](content/why-github-is-the-best-knowledge-base.md)
 
-## Tip 48: Review a TESTING.md instead of the raw code
+## Tip 48: Learn to review code through a TESTING.md document
 
 When you need to review a large amount of code (Claude Code generated code, a PR from your teammate, or an external PR), the real challenge is building a mental model of what's going on. The question is, how do you know if this is correct? You can read the code. You can write tests. But there is another way that's one level above those.
 
