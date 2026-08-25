@@ -93,15 +93,16 @@ jobs:
           [ "$fail" = "0" ] && echo "ALL VALIDATIONS PASSED"
           exit "$fail"
 
-      - name: Check history.jsonl entry is valid JSON (informational)
+      - name: Check history.jsonl entry is valid JSON with the exact Windows path
         run: |
           line=$(tail -1 "$HOME/.claude/history.jsonl")
           echo "$line"
-          if echo "$line" | python -c 'import json,sys; json.loads(sys.stdin.read())' 2>/dev/null; then
-            echo "OK: history entry parses as JSON"
-          else
-            echo "NOTE: history entry is NOT valid JSON (raw backslashes from the Windows path are embedded unescaped)"
-          fi
+          echo "$line" | python -c '
+          import json, sys
+          entry = json.loads(sys.stdin.read())
+          assert entry["project"] == r"C:\Users\runneradmin\testproj", entry["project"]
+          print("OK: history entry parses as JSON and the project path round-trips exactly")
+          '
 
       - name: Confirm old scripts fail (regression baseline)
         run: |

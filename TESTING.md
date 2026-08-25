@@ -11,10 +11,10 @@ Verified on a real Windows runner in GitHub Actions ([run](https://github.com/de
 - The conversion is correct both ways. `C:\Users\yurizen` and `C:/Users/yurizen` both map to `C--Users-yurizen`, the reverse mapping restores `C:\Users\yurizen`, and POSIX paths behave exactly as before.
 - The bug is real and silent. The unpatched script, given a Windows-style project path, exits 0 but writes the clone into a mangled stray directory (`-C:...`) that Claude Code never reads. The patched script writes it next to the source conversation where it belongs.
 - The test suite now runs on Git Bash. The unpatched suite dies immediately with `uuidgen: command not found`. The patched one passes 19/19 there, and still 19/19 on macOS, so no regression.
-- One finding, not a blocker. The history.jsonl entry embeds the Windows path with raw backslashes (`"project":"C:\Users\..."`), which is not valid JSON. The escaping gap is pre-existing, but Windows paths only reach that code with this PR. Worth a follow-up.
+- One finding, fixed here in #68. The history.jsonl entry embedded the Windows path with raw backslashes (`"project":"C:\Users\..."`), which is not valid JSON. The escaping gap is pre-existing, but Windows paths only reach that code with #67. Impact was contained. Claude Code's shipped bundle parses each history line in its own try/catch and skips lines it cannot read, so only the clone's own history entry was lost, and that parsing lives in the cross-platform JS, no Windows environment needed to confirm it. #68 escapes the path the same way the display text already is, and CI now asserts the entry parses as JSON and the path round-trips exactly.
 - Known ambiguity, shared with Claude Code's own convention. Hyphens in folder names reverse to separators, so `C:\Users\my-project` comes back as `C:\Users\my\project`.
 
-Verdict: correct, minimal, safe to merge. The history JSON escaping is a good candidate for a follow-up PR.
+Verdict: correct, minimal, safe to merge, with the history escaping fixed in #68 on top.
 
 ## PR #64: openssl UUID fallback for Windows/Git Bash
 
