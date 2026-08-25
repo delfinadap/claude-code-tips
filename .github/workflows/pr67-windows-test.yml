@@ -114,11 +114,14 @@ jobs:
           out=$(bash old-tests.sh 2>&1)
           code=$?
           set -e
-          echo "$out" | grep -i "uuidgen" | head -3
-          if [ "$code" -ne 0 ] && echo "$out" | grep -qi "uuidgen.*not found\|command not found"; then
+          echo "$out" | tail -20
+          echo "old test suite exit code: $code"
+          if [ "$code" -ne 0 ] && echo "$out" | grep -qi "command not found"; then
             echo "CONFIRMED: old test suite cannot run on Git Bash (exit $code)"
+          elif [ "$code" -ne 0 ]; then
+            echo "NOTE: old test suite failed (exit $code) but not with a command-not-found error"
           else
-            echo "NOTE: old test suite exited $code without a uuidgen error - PR premise not reproduced"
+            echo "NOTE: old test suite passed - PR premise not reproduced"
           fi
 
           echo "=== old half-clone with a Windows path ==="
