@@ -1021,7 +1021,7 @@ When you need to review a large amount of code (Claude Code generated code, a PR
 
 What I recommend is to have Claude Code test everything in the given code thoroughly, let it document how it tested and verified everything in a TESTING.md document, and review that document manually instead. You can go back and forth on it to get a good format for you to review. If it's too long, ask it to make it shorter. If it's too short, ask for more information. If it has jargon you don't understand, ask it to explain or simplify.
 
-Here is a real example: [TESTING.md](TESTING.md) from this repo. It started with the review of one external PR, where Claude Code reproduced the bug on a real Windows runner in GitHub Actions, verified the fix, and summarized everything it tested. Now it's a running log that we keep updating with each review. Tracking it in git this way also gives you a record of how everything has been tested. If someone asks, or if you ask yourself, how do I know if something works as intended, you can look at this document or have Claude Code look at it.
+Here is a real example: [TESTING.md](TESTING.md) from this repo. It started with the review of one external PR, where Claude Code reproduced the bug on a real Windows runner in GitHub Actions, verified the fix, and summarized everything it tested. Now it's a running log that we keep updating with each review. Tracking it in git this way also gives you a record of how everything has been tested. If you want to know if something works as intended, then you can simply look at this document.
 
 ---
 
