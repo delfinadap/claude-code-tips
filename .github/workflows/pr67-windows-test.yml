@@ -105,13 +105,16 @@ jobs:
 
       - name: Confirm old scripts fail (regression baseline)
         run: |
-          git fetch origin main --depth 1 || git fetch https://github.com/ykdojo/claude-code-tips main --depth 1
+          # Baseline = upstream main (includes the #64 openssl fallback), so the
+          # only failure left to demonstrate is the path bug this PR fixes.
+          git fetch https://github.com/ykdojo/claude-code-tips main --depth 1
           git show FETCH_HEAD:scripts/half-clone-conversation.sh > old-script.sh
-          git show FETCH_HEAD:scripts/test-half-clone.sh > old-tests.sh
+          # Old test suite goes into scripts/ so it finds its sibling script.
+          git show FETCH_HEAD:scripts/test-half-clone.sh > scripts/old-tests.sh
 
           echo "=== old test suite on Git Bash ==="
           set +e
-          out=$(bash old-tests.sh 2>&1)
+          out=$(bash scripts/old-tests.sh 2>&1)
           code=$?
           set -e
           echo "$out" | tail -20
