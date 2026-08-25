@@ -2,9 +2,9 @@
 
 A running log of how changes to this repo were tested. One section per review, newest first.
 
-## PR #67: Windows path handling in half-clone
+## PR #67 and #68: Windows path handling in half-clone
 
-PR: [ykdojo/claude-code-tips#67](https://github.com/ykdojo/claude-code-tips/pull/67) by Atticus-42, a follow-up to #64. Two changes: `convert_path_to_dirname` and `get_project_from_conv_file` learn Windows-style paths, and `test-half-clone.sh` gets the same UUID fallback chain as the main script so it can run on Git Bash.
+PR: [ykdojo/claude-code-tips#67](https://github.com/ykdojo/claude-code-tips/pull/67) by Atticus-42, a follow-up to #64. Two changes: `convert_path_to_dirname` and `get_project_from_conv_file` learn Windows-style paths, and `test-half-clone.sh` gets the same UUID fallback chain as the main script so it can run on Git Bash. [#68](https://github.com/ykdojo/claude-code-tips/pull/68) is the review branch for it, and adds one fix of its own for a bug the review surfaced: escaping the project path in the history.jsonl entry (details below).
 
 Verified on a real Windows runner in GitHub Actions ([run](https://github.com/delfinadap/claude-code-tips/actions/runs/32866554507), workflow on this branch) and on macOS locally:
 
