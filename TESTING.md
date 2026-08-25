@@ -1,10 +1,28 @@
-# PR #64 review: openssl UUID fallback for Windows/Git Bash
+# TESTING.md
+
+A running log of how changes to this repo were tested. One section per review, newest first. If you want to know whether something works as intended, or how we know it does, read the relevant section or point Claude Code at this file and ask.
+
+## PR #67: Windows path handling in half-clone
+
+PR: [ykdojo/claude-code-tips#67](https://github.com/ykdojo/claude-code-tips/pull/67) by Atticus-42, a follow-up to #64. Two changes: `convert_path_to_dirname` and `get_project_from_conv_file` learn Windows-style paths, and `test-half-clone.sh` gets the same UUID fallback chain as the main script so it can run on Git Bash.
+
+Verified on a real Windows runner in GitHub Actions ([run](https://github.com/delfinadap/claude-code-tips/actions/runs/32866554507), workflow on this branch) and on macOS locally:
+
+- The conversion is correct both ways. `C:\Users\yurizen` and `C:/Users/yurizen` both map to `C--Users-yurizen`, the reverse mapping restores `C:\Users\yurizen`, and POSIX paths behave exactly as before.
+- The bug is real and silent. The unpatched script, given a Windows-style project path, exits 0 but writes the clone into a mangled stray directory (`-C:...`) that Claude Code never reads. The patched script writes it next to the source conversation where it belongs.
+- The test suite now runs on Git Bash. The unpatched suite dies immediately with `uuidgen: command not found`. The patched one passes 19/19 there, and still 19/19 on macOS, so no regression.
+- One finding, not a blocker. The history.jsonl entry embeds the Windows path with raw backslashes (`"project":"C:\Users\..."`), which is not valid JSON. The escaping gap is pre-existing, but Windows paths only reach that code with this PR. Worth a follow-up.
+- Known ambiguity, shared with Claude Code's own convention. Hyphens in folder names reverse to separators, so `C:\Users\my-project` comes back as `C:\Users\my\project`.
+
+Verdict: correct, minimal, safe to merge. The history JSON escaping is a good candidate for a follow-up PR.
+
+## PR #64: openssl UUID fallback for Windows/Git Bash
 
 PR: [ykdojo/claude-code-tips#64](https://github.com/ykdojo/claude-code-tips/pull/64) by Atticus-42. One commit, one file (`scripts/half-clone-conversation.sh`, +8/-1).
 
 The claim: the script's three ways of generating UUIDs all rely on tools Git Bash on Windows doesn't have, so half-clone fails there with "No UUID generation method available". Git Bash does ship `openssl`, so the PR adds it as a fallback.
 
-Verified on a real Windows runner in GitHub Actions, whose default bash is Git Bash ([run](https://github.com/delfinadap/claude-code-tips/actions/runs/32756286008), workflow on this branch):
+Verified on a real Windows runner in GitHub Actions, whose default bash is Git Bash ([run](https://github.com/delfinadap/claude-code-tips/actions/runs/32756286008), workflow on the `test/pr64-windows-gitbash` branch):
 
 - The claim holds. The three tools are missing, the unpatched script fails with exactly that error, the patched one writes a working clone.
 - The clone is correct on Windows and macOS. Valid UUIDs, message links intact, no duplicates in a 10,000-UUID bulk run, no hidden Windows line-ending characters.
