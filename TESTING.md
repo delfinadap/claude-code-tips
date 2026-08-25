@@ -1,6 +1,6 @@
 # TESTING.md
 
-A running log of how changes to this repo were tested. One section per review, newest first. If you want to know whether something works as intended, or how we know it does, read the relevant section or point Claude Code at this file and ask.
+A running log of how changes to this repo were tested. One section per review, newest first.
 
 ## PR #67: Windows path handling in half-clone
 
